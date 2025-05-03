@@ -164,20 +164,20 @@ amf:
       - address: ${OPEN5GS_IP}
   guami:
     - plmn_id:
-        mcc: 901
-        mnc: 70
+        mcc: 001
+        mnc: 01
       amf_id:
         region: 2
         set: 1
   tai:
     - plmn_id:
-        mcc: 901
-        mnc: 70
+        mcc: 001
+        mnc: 01
       tac: 7
   plmn_support:
     - plmn_id:
-        mcc: 901
-        mnc: 70
+        mcc: 001
+        mnc: 01
       s_nssai:
         - sst: 1
   security:
