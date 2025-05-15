@@ -58,3 +58,63 @@ cd pysim
    ```
 
 - The **Ki** and **OPC** will be generated automatically.
+
+---
+
+### SUCI Configuration via pySIM-shell
+
+```text
+pySIM-shell.py
+pySIM-shell (MF)> select MF
+pySIM-shell (MF)> select ADF.USIM
+pySIM-shell (MF/ADF.USIM)> select EF.UST
+pySIM-shell (MF)> verify_adm <ADM-KEY>
+pySIM-shell (MF/ADF.USIM/EF.UST)> ust_service_deactivate 124
+pySIM-shell (MF/ADF.USIM/EF.UST)> ust_service_deactivate 125
+```
+
+---
+
+### Phone Setup Instructions
+
+- MCC and MNC in the APN on the phone are auto-filled based on the first 5 digits of the IMSI.
+- The srsRAN website uses OnePlus 8T which connects better with roaming (PLMN: 90170).
+- For Pixel phones, roaming hacks are usually unnecessary. Use PLMN **00101** (MCC+MNC), and the IMSI must start with **00101**.
+- Use the **COTS UE setup steps** from the srsRAN documentation.
+
+#### Configure Your Pixel Phone:
+
+1. Enable developer mode: Tap **Build Number** multiple times in phone settings.
+2. Open dialer and enter `*#*#4636#*#*`, then set **Preferred Network Type** to **NR only**.
+3. The phone can see signal without SIM registration in the 5G core.
+
+#### Register SIM in Open5GS Core:
+
+- Add **IMSI**, **Ki**, and **OPC** to `open5gs.env`.
+- Other parameters can remain unchanged.
+- The phone should now connect to the network **srsRAN**.
+- If it doesn't, try restarting the phone or toggling airplane mode.
+
+---
+
+### Pixel Disconnection Fix
+
+If the Pixel device keeps disconnecting:
+
+1. Dial `*#*#0702#*#*`
+2. Adjust timers:
+   - Set `NR_TIMER_WAIT_IMS_REGISTRATION` to `-1` (infinite timeout)
+   - Set `SUPPORT_IMS_NR_REGISTRATION_TIMER` to `0` (disable timeout)
+
+These settings are **SIM-specific** and persist across reboots.
+
+---
+
+### Connectivity Test
+
+Once the phone is connected:
+
+- Use **Termux app** on the phone:
+  - **Uplink Test**: `ping 10.45.0.1`
+- From the 5G core (bash into container):
+  - **Downlink Test**: `ping 10.45.1.2`
