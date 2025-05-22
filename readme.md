@@ -1,3 +1,9 @@
+# srsRAN with USRP x310 and COTS UEs
+
+## USRP Setup
+
+https://github.com/uoy-research/srsRAN-USRPs-OTA?tab=readme-ov-file#steps-for-setting-up-usrp-x310
+
 ## SIM Setup
 
 ### Install Dependencies
@@ -88,14 +94,13 @@ pySIM-shell (MF/ADF.USIM/EF.UST)> ust_service_deactivate 125
 2. Open dialer and enter `*#*#4636#*#*`, then set **Preferred Network Type** to **NR only**.
 3. The phone can see signal without SIM registration in the 5G core.
 
-#### Register SIM in Open5GS Core:
+## Starting up the 5g core
 
-- Add **IMSI**, **Ki**, and **OPC** to `open5gs.env`.
-- Other parameters can remain unchanged.
-- The phone should now connect to the network **srsRAN**.
-- If it doesn't, try restarting the phone or toggling airplane mode.
+- Pick either the dockerised 5g core or the non dockerised 5g core (recommended)
 
 ---
+
+## Troubleshooting
 
 ### Pixel Disconnection Fix
 
@@ -116,5 +121,5 @@ Once the phone is connected:
 
 - Use **Termux app** on the phone:
   - **Uplink Test**: `ping 10.45.0.1`
-- From the 5G core (bash into container):
+- From the 5G core:
   - **Downlink Test**: `ping 10.45.1.2`
