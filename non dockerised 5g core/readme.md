@@ -123,47 +123,15 @@ Access the WebUI at [http://localhost:9999](http://localhost:9999) and log in wi
 
 To allow your UE to access the internet via the PGWU/UPF, enable IP forwarding and configure NAT.
 
-### Enable IPv4/IPv6 Forwarding
-
 ```bash
+sudo ip tuntap add name ogstun mode tun
+sudo ip addr add 10.45.0.1/16 dev ogstun
+sudo ip addr add 2001:db8:cafe::1/48 dev ogstun
+sudo ip link set ogstun up
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl -w net.ipv6.conf.all.forwarding=1
-```
-
-### Add NAT Rules
-
-```bash
 sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
 sudo ip6tables -t nat -A POSTROUTING -s 2001:db8:cafe::/48 ! -o ogstun -j MASQUERADE
-```
-
-### Configure Firewall (UFW)
-
-Check the firewall status and disable it if necessary:
-
-```bash
-sudo ufw status
 sudo ufw disable
-sudo ufw status
-```
-
-### Optional Security Rules
-
-- Accept packets on the `ogstun` interface:
-
-```bash
 sudo iptables -I INPUT -i ogstun -j ACCEPT
-```
-
-- Prevent UEs from accessing the host running the UPF:
-
-```bash
-sudo iptables -I INPUT -s 10.45.0.0/16 -j DROP
-sudo ip6tables -I INPUT -s 2001:db8:cafe::/48 -j DROP
-```
-
-- Block UE-originated traffic from reaching other network functions (replace `x.x.x.x/y` accordingly):
-
-```bash
-sudo iptables -I FORWARD -s 10.45.0.0/16 -d x.x.x.x/y -j DROP
 ```
