@@ -99,6 +99,20 @@ sudo systemctl restart open5gs-webui
 systemctl list-units --type=service | grep open5gs
 ```
 
+### Stop all Open5GS Services
+
+```bash
+sudo systemctl stop open5gs-*
+```
+
+### View AMF Logs
+
+```bash
+sudo journalctl -fu open5gs-amfd
+```
+
+---
+
 ## Step 9: Register Subscriber Information
 
 Access the WebUI at [http://localhost:9999](http://localhost:9999) and log in with the following credentials:
