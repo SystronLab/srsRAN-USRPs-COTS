@@ -1,5 +1,7 @@
 # srsRAN with USRP x310 and COTS UEs
 
+Guide to setup srsRAN with USRP x310 and Google Pixel
+
 ## USRP Setup
 
 https://github.com/uoy-research/srsRAN-USRPs-OTA?tab=readme-ov-file#steps-for-setting-up-usrp-x310
