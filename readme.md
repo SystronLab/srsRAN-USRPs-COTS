@@ -8,18 +8,16 @@ https://github.com/uoy-research/srsRAN-USRPs-OTA?tab=readme-ov-file#steps-for-se
 
 ## SIM Setup
 
-### Install Dependencies
+#### Install Dependencies
 
 ```bash
 sudo apt-get install pcscd pcsc-tools libccid libpcsclite-dev python3-pyscard
 ```
 
-### Connect SIM Card Reader
+#### Connect SIM Card Reader
 
 1. Connect your SIM card reader to your computer.
 2. Insert a programmable SIM card into the reader.
-
-### Verify Connection
 
 Check the status of the connection:
 
@@ -30,8 +28,6 @@ pcsc_scan
 If the SIM card reader is recognized, you should see **"Card inserted"**.
 
 ---
-
-### Note:
 
 The SIM programming section on the srsRAN website is outdated as of **23 Apr 2025**.
 
@@ -45,7 +41,7 @@ cd pysim
 
 ---
 
-### SIM Programming Commands
+#### SIM Programming Commands
 
 1. Check the current ISIM configuration:
 
@@ -67,9 +63,7 @@ cd pysim
 
 - As soon as the programming is done, the **Ki** and **OPC** will be generated automatically. Please note them down as they will be needed while inserting info in the 5g core.
 
----
-
-### SUCI Configuration via pySIM-shell
+#### SUCI Configuration via pySIM-shell
 
 ```text
 ./pySim-shell.py -p0
@@ -81,30 +75,15 @@ pySIM-shell (MF/ADF.USIM/EF.UST)> ust_service_deactivate 124
 pySIM-shell (MF/ADF.USIM/EF.UST)> ust_service_deactivate 125
 ```
 
----
-
-### Phone Setup Instructions
+## Pixel Phone Setup
 
 - MCC and MNC in the APN on the phone are auto-filled based on the first 5 digits of the IMSI.
 - The srsRAN website uses OnePlus 8T which connects better with roaming (PLMN: 90170).
 - For Pixel phones, roaming hacks are usually unnecessary. Use PLMN **00101** (MCC+MNC), and the IMSI must start with **00101**.
-- Use the **COTS UE setup steps** from the srsRAN documentation.
-
-#### Configure Your Pixel Phone:
 
 1. Enable developer mode: Tap **Build Number** multiple times in phone settings.
 2. Open dialer and enter `*#*#4636#*#*`, then set **Preferred Network Type** to **NR only**.
 3. The phone can see signal without SIM registration in the 5G core.
-
-## Starting up the 5g core
-
-- Pick either the dockerised 5g core or the non dockerised 5g core (recommended)
-
----
-
-## Troubleshooting
-
-### Pixel Disconnection Fix
 
 If the Pixel device keeps disconnecting:
 
@@ -114,6 +93,15 @@ If the Pixel device keeps disconnecting:
    - Set `SUPPORT_IMS_NR_REGISTRATION_TIMER` to `0` (disable timeout)
 
 These settings are **SIM-specific** and persist across reboots.
+
+SIM info
+
+<img src="assets/sim_settings.png" alt="Alt text" width="400"/>
+
+Access Point
+
+<img src="assets/access_point_1.png" alt="Alt text" width="400"/>
+<img src="assets/access_point_2.png" alt="Alt text" width="400"/>
 
 ---
 
