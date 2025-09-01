@@ -65,7 +65,7 @@ cd pysim
    ./pySim-prog.py -p0 -s 8949440000001343795 --mcc=901 --mnc=70 -a 87641773 --imsi=999700000134379
    ```
 
-- The **Ki** and **OPC** will be generated automatically.
+- As soon as the programming is done, the **Ki** and **OPC** will be generated automatically. Please note them down as they will be needed while inserting info in the 5g core.
 
 ---
 
