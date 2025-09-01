@@ -72,7 +72,7 @@ cd pysim
 ### SUCI Configuration via pySIM-shell
 
 ```text
-pySIM-shell.py
+./pySim-shell.py -p0
 pySIM-shell (MF)> select MF
 pySIM-shell (MF)> select ADF.USIM
 pySIM-shell (MF/ADF.USIM)> select EF.UST
